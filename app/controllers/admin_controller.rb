@@ -25,16 +25,10 @@ class AdminController < ApplicationController
   
   def signup
     if request.post?
-      @code = Invitation.find_by_code(params[:invitation])
       @user = User.new(params[:user])
-      if @code and @user.save
-        @user.add_invitations()
-        @code.destroy
+      if @user.save
         flash[:info] = "Account has been successfully created."
         redirect_to login_path
-      else
-        @code_errors = ["Invitation is invalid."]
-        flash.now[:notice] = "Errors occurred."
       end
     else
       @user = User.new
@@ -43,7 +37,6 @@ class AdminController < ApplicationController
 
   def account
     @user = User.find_by_id(session[:user_id])
-    @invitation_code = @user.invitations
     if request.put?
       if params[:category] == 'password'
         if User.authenticate(@user.name, params[:current_password])

@@ -44,19 +44,6 @@
       </div>
     </div>
 
-    <div class="control-group <%= "error" if @code_errors %>">
-      <label class="control-label">Invitation Code:</label>
-      <div class="controls">
-        <%= text_field_tag :invitation, params[:invitation] %>
-		<% if @code_errors %>
-		<span class="help-block">
-			<%= @code_errors.join(" ")%>
-		</span>
-		<% end %>
-		<p class="help-block">Ask around to see if anybody has one.</p>
-      </div>
-    </div>
-
     <div class="form-actions">
       <%= f.submit "Sign Up", :class => "btn btn-primary" %>
     </div>

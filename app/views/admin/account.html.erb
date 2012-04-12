@@ -52,23 +52,6 @@
   </fieldset>
 <% end %>
 
-<% elsif category == 'invitation' %>
-
-<form class="form-horizontal">
-	<fieldset>
-		<legend>Invitation Code</legend>
-		<div class= "invitation-code">
-			<% if @invitation_code.any? %>
-			<% @invitation_code.each do |i| %>
-			<code><%= i.code %></code>
-			<% end %>
-			<% else %>
-			<p>Congratulation! All of your invitation codes are used.</p>
-			<% end %>
-		</div>
-	</fieldset>
-</form>
-
 <% else %>
 
 <div class="alert">
