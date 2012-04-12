@@ -1,0 +1,66 @@
+<div class="well atmlogin">
+
+<%= form_for @user, :url => signup_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>Sign Up Here</legend>
+
+	<% name_error = @user.errors.get(:name) %>
+
+    <div class="control-group <%= "error" if name_error %>">
+      <label class="control-label">Username:</label>
+	  <div class="controls">
+        <%= f.text_field :name %>
+		<% if name_error %>
+		<span class="help-block"><%= name_error.join(" ")%></span>
+		<% end %>
+	  </div>
+    </div>
+
+	<% password_error = @user.errors.get(:password) %>
+
+    <div class="control-group <%= "error" if password_error %>">
+      <label class="control-label">Password:</label>
+      <div class="controls">
+        <%= f.password_field :password %>
+		<% if password_error %>
+		<span class="help-block">
+			<%= password_error.join(" ")%>
+		</span>
+		<% end %>
+      </div>
+    </div>
+
+	<% password_confirmation_error = @user.errors.get(:password_confirmation) %>
+
+    <div class="control-group <%= "error" if password_confirmation_error %>">
+      <label class="control-label">Confirm:</label>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+		<% if password_confirmation_error %>
+		<span class="help-block">
+			<%= password_confirmation_error.join(" ")%>
+		</span>
+		<% end %>
+      </div>
+    </div>
+
+    <div class="control-group <%= "error" if @code_errors %>">
+      <label class="control-label">Invitation Code:</label>
+      <div class="controls">
+        <%= text_field_tag :invitation, params[:invitation] %>
+		<% if @code_errors %>
+		<span class="help-block">
+			<%= @code_errors.join(" ")%>
+		</span>
+		<% end %>
+		<p class="help-block">Ask around to see if anybody has one.</p>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Sign Up", :class => "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>
+
+</div>

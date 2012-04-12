@@ -1,0 +1,274 @@
+<%= form_for @turing_machine, :html => { :class => 'form-turing' } do |f| %>
+  <fieldset>
+	<div class="modal-body">
+	<div class="modal-inner">
+	<% error_name = @turing_machine.errors.get(:name) %>
+    <div class="control-group <%= "error" if error_name -%>">
+	  <label>Give it a name: <%= error_name.join(" ") if error_name %></label>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text-field-full-width' %>
+      </div>
+    </div>
+
+	<% error_description = @turing_machine.errors.get(:description) %>
+    <div class="control-group <%= "error" if error_description -%>">
+      <label>Describe it briefly: <%= error_description.join(" ") if error_description %></label>
+      <div class="controls">
+        <%= f.text_field :description, :class => 'text-field-full-width' %>
+      </div>
+    </div>
+
+	<div class="control-group">
+	<div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#tm-instruction">
+          Instruction
+        </a>
+      </div>
+      <div id="tm-instruction" class="accordion-body collapse <%= 'in' if @first_invention -%>">
+        <div class="accordion-inner">
+          <p>A Turing machine has an infinite one-dimensional tape divided into cells. Traditionally we think of the tape as being horizontal with the cells arranged in a left-right orientation. The tape has one end, at the left say, and stretches infinitely far to the right. Each cell is able to contain one symbol.</p>
+		  <p>The machine has a read-write head which is scanning a single cell on the tape. This read-write head can move left and right along the tape to scan successive cells.</p>
+		  <p>The action of a Turing machine is determined completely by (1) the current state of the machine (2) the symbol in the cell currently being scanned by the head and (3) a table of transition rules, which serve as the “program” for the machine.</p>
+		  <p>Each transition rule is a 5-tuple:</p>
+		  <p>&lt;this state, this symbol, that state, that symbol, shift&gt;</p>
+		  <p>which can be read as saying 'if the machine is in <u>this state</u> and the cell being scanned contains <u>this symbol</u>, then it move into <u>that state</u>, write <u>that symbol</u> on the tape in the current cell and make a <u>shift left</u> or <u>shift right</u>, or <u>stand still</u>'.</p>
+		  <p>If the machine reaches a situation in which there is no unique transition rule to be carried out, i.e., there is none or more than one, then the machine halts.</p>
+		  <p>Every Turing machine has the same machinery. What makes one Turing machine perform one task and another a different task is the table of transition rules that make up the machine's program, and a specified initial state for the machine.</p>
+		  <p>Initially, the cells on the tape are blank, but not filled with spaces. We use the symbol ␣ to show an explicit space code.</p>
+		  <p><small>- This instruction is based on the material from <a href="http://plato.stanford.edu/entries/turing-machine/" target="_blank">Stanford Encyclopedia of Philosophy</a>.</small></p>
+        </div>
+      </div>
+    </div>
+	</div>
+
+	<% error_definition = @turing_machine.errors.get(:definition) %>
+	<% tm_def = @turing_machine.definition || '' %>
+	<%= f.text_field :definition, :class => 'hide' %>
+    <div class="control-group <%= "error" if error_definition and error_definition.any? -%>">
+		<table class="table table-bordered table-striped" id="tm-rule-table">
+			<thead>
+				<tr>
+					<th>Table of Rules</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<ul class="btn-group nav-pills">
+							<li class="dropdown btn btn-primary btn-mini  <%= 'chosen' if !tm_def.blank? -%>">
+								<a data-toggle="dropdown"><%= tm_def.blank? ? 'Choose Initial State' : ascii_to_string(tm_def.ord) %></a>
+								<div class="dropdown-menu" id="tm-initial-state">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<% if !tm_def.blank? %>
+				<% tm_def[1..-1].scan(/...../).each do |d| %>
+				<% if d.length == 5 %>
+				<tr>
+					<td>
+						<ul class="btn-group nav-pills">
+							<li class="dropdown btn btn-primary btn-mini chosen">
+								<a data-toggle="dropdown"><%= ascii_to_string d[0].ord %></a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini chosen">
+								<a data-toggle="dropdown"><%= ascii_to_string d[1].ord %></a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini chosen">
+								<a data-toggle="dropdown"><%= ascii_to_string d[2].ord %></a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini chosen">
+								<a data-toggle="dropdown"><%= ascii_to_string d[3].ord %></a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini chosen">
+								<a data-toggle="dropdown"><%= ascii_to_shift d[4].ord %></a>
+								<div class="dropdown-menu">
+									<code>shift left</code>
+									<code>stand still</code>
+									<code>shift right</code>
+								</div>
+							</li>
+						</ul>
+						<a class="close pull-right">×</a>
+					</td>
+				</tr>
+				<% end %>
+				<% end %>
+				<tr>
+					<td>
+						<ul class="btn-group nav-pills">
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">This State</a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">This Symbol</a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">That State</a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">That Symbol</a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">Shift</a>
+								<div class="dropdown-menu">
+									<code>shift left</code>
+									<code>stand still</code>
+									<code>shift right</code>
+								</div>
+							</li>
+						</ul>
+						<a class="close pull-right">×</a>
+					</td>
+				</tr>					
+				<% end %>
+				<tr class="hide">
+					<td>
+						<ul class="btn-group nav-pills">
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">This State</a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">This Symbol</a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">That State</a>
+								<div class="dropdown-menu">
+									<% (('0'..'9').to_a+('A'..'Z').to_a+('a'..'z').to_a).each do |c| %>
+									<code><%= c %></code>
+									<% end %>
+								</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">That Symbol</a>
+								<div class="dropdown-menu">
+									<code>␣</code>
+									<% (33..126).to_a.each do |n| %>
+									<code><%= ('&#'+n.to_s+';').html_safe %></code>
+									<% end %>
+									<code>blank</code>
+							  	</div>
+							</li>
+							<li class="dropdown btn btn-primary btn-mini">
+								<a data-toggle="dropdown">Shift</a>
+								<div class="dropdown-menu">
+									<code>shift left</code>
+									<code>stand still</code>
+									<code>shift right</code>
+								</div>
+							</li>
+						</ul>
+						<a class="close pull-right">×</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<% if error_definition %>
+		<label>Error: <%= error_definition.join(" ") if error_definition %></label>
+		<% end %>
+    </div>
+
+	<% error_default_input = @turing_machine.errors.get(:default_input) %>
+	<% error_short_url = @turing_machine.errors.get(:short_url) %>
+	<% tm_default_input = @turing_machine.default_input %>
+	<% tm_short_url = @turing_machine.short_url %>
+	<% option_present = (tm_default_input and !tm_default_input.empty?) or (tm_short_url && tm_short_url.empty?) %>
+
+	<div id="tm-options" class="<%= "hide" unless option_present -%>">
+
+    <div class="control-group <%= "error" if error_default_input -%>">
+      <label>Default input on tape (optional): <%= error_default_input.join(" ") if error_default_input %></label>
+      <div class="controls">
+        <%= f.text_field :default_input,:class => 'text-field-full-width' %>
+      </div>
+    </div>
+
+    <div class="control-group <%= "error" if error_short_url -%>">
+      <label>Shortcut (optional): <%= error_short_url.join(" ") if error_short_url %></label>
+      <div class="controls">
+	    <div class="input-prepend">
+	    	<span class="add-on">http://awesometuringmachine.com/s/</span>
+	        <%= f.text_field :short_url, :class => 'text-field-half-width' %>
+		</div>
+      </div>
+    </div>
+
+	</div>
+
+	<div class="btn btn-mini <%= "hide" if option_present -%>" id="tm-options-more">View More Options</div>
+
+	<div class="btn btn-mini <%= "hide" unless option_present -%>" id="tm-options-less">View Less Options</div>
+
+	</div>
+	</div>
+	<div class="modal-footer">
+	<%= f.submit 'Save', :class => 'btn btn-primary' %>
+	<%= link_to 'Cancel', home_path, :class => 'btn' %>
+	</div>
+  </fieldset>
+<% end %>

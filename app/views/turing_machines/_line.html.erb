@@ -1,0 +1,37 @@
+<div class="content-tm-body">
+	<div class="content-item">
+		<div class="content-tm-inner">
+			<ul class="pull-right">
+				<li>
+					<%= link_to turing_machine_path(item), 'data-method' => 'play' do %>
+					<i class="icon-play"></i>
+					<span>Play</span>
+					<% end %>
+				</li>
+				<% if type == 'invention' and is_owner %>
+				<li>
+					<%= link_to edit_turing_machine_path(item) do %>
+					<i class="icon-pencil"></i>
+					<span>Edit</span>
+					<% end %>
+				</li>
+				<li>
+					<%= link_to turing_machine_path(item), :method => :delete, :confirm => 'Are you sure?' do %>
+					<i class="icon-trash"></i>
+					<span>Delete</span>
+					<% end %>
+				</li>
+				<% end %>
+				<li>
+					<span>·</span>
+					<%= link_to turing_machine_path(item), :target=>"_blank" do %>
+					<span>Open</span>
+					<% end %>
+				</li>
+			</ul>
+			<strong><%= item.name %></strong>
+			<p><%= item.description%></p>
+			<p><small>- Created by <%= item.user ? (link_to item.user.name, :controller => 'index', :action => 'home', :user_name => item.user.name ) : 'unknown' %> at <%= item.created_at.to_s(:short) %>.</small></p>
+		</div>
+	</div>
+</div>

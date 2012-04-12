@@ -1,0 +1,451 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+body{
+	background: #E7EAEC url(bg.jpg) repeat-x center top;
+}
+
+.navbar {
+	.box-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+
+legend {
+	text-align: center;
+	padding: 18px 0 17px;
+}
+
+.atmhead {
+	padding-top: 36px;
+	margin-bottom: 72px;
+	text-align: center;
+	h1 {
+		font-size: 75px;
+		line-height: 1;
+		margin-bottom: 18px
+	}
+	p {
+		margin-left: 5%;
+		margin-right: 5%;
+		font-size: 30px;
+		line-height: 36px;
+		font-weight: 300;
+	}
+}
+
+.invitation-code {
+	text-align: center;
+	padding-top: 30px;
+}
+
+.row-fluid .content-tm {
+	margin-bottom: 20px;
+	.content-tm-inner {
+		background: white;
+		padding: 12px;
+	}
+	h2 {
+		line-height: 20px;
+		font-size: 18px;
+		text-align: center;
+	}
+	.content-tm-header {
+		border: 1px solid #EEE;
+		border: 1px solid rgba(0, 0, 0, .1);
+		.border-radius(6px 6px 0 0);
+		.content-tm-inner {
+			.border-radius(5px 5px 0 0);
+		}
+	}
+	.content-tm-body {
+		border-left: 1px solid #EEE;
+		border-left: 1px solid rgba(0, 0, 0, .1);
+		border-right: 1px solid #EEE;
+		border-right: 1px solid rgba(0, 0, 0, .1);
+		border-bottom: 1px solid #EEE;
+		border-bottom: 1px solid rgba(0, 0, 0, .1);
+	}
+	.content-item-control {
+		border-top-color: 1px solid #DDD;
+		border: 1px solid #EEE;
+		border: 1px solid rgba(0, 0, 0, .1);
+		border-bottom-width: 0px;
+		.box-shadow(inset 0 3px 8px rgba(0,0,0,.05));
+		.content-tm-inner {
+			background-color: whiteSmoke;
+			padding: 10px 1px;
+			text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+			text-align: center;
+		}
+		.content-tm-inner:hover {
+			background-color: #EEE;
+			text-decoration: none;
+		}
+	}
+	.content-item {
+		.content-tm-inner {
+			padding: 9px 12px;
+			p {
+				margin: 0;
+			}
+			ul {
+				list-style-type: none;
+				margin: 0;
+				li {
+					display: inline;
+					margin-left: 7px;
+				}		
+			}
+		}
+	}
+	.content-tm-body:last-child {
+		.border-radius(0 0 6px 6px);
+		.content-tm-inner {
+			.border-radius(0 0 5px 5px);
+		}
+	}
+}
+
+small {
+	color: #999;
+}
+
+.modal {
+	max-height: 600px;
+	.modal-body {
+		max-height: 400px;
+		overflow-y: auto;
+		border-bottom: 1px solid #EEE;
+		blockquote, .accordion-group {
+			margin: 0;
+		}
+	}
+	.modal-body:last-child {
+		border-bottom-width: 0;
+	}
+}
+
+.modal-static {
+	position: static;
+	margin: auto;
+	max-height: none;
+	.modal-body {
+		max-height: none;
+	}
+}
+
+form {
+	margin: 0px
+}
+
+.pager{
+	max-width: 560px;
+	margin: 0 auto 18px;
+}
+
+hr.soften {
+  height: 1px;
+  margin: 54px 0;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  border: 0;
+}
+
+.atmbody {
+	h1 {
+		margin: 36px 0 27px;
+		font-size: 30px;
+		font-weight: 300;
+		text-align: center;
+	}
+	h2 {
+		font-size: 22px;
+		font-weight: 300;
+		line-height: 36px;
+	}
+	h3 {
+		margin: -18px 0 27px;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 24px;
+		color: #999;
+		text-align: center;
+	}
+	p {
+		margin: 0 0 10px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 13px;
+		line-height: 18px;
+	}
+}
+
+.form-turing {
+	.text-field-full-width {
+		width: 98%;
+	}
+	.text-field-half-width {
+		width: 55%;
+		margin: 0 0 0 -4px;
+	}
+}
+
+.atmlogin {
+	margin: 36px auto 0;
+	max-width: 520px
+}
+
+#tm-show-table {
+	td {
+		border-width: 0;
+	}
+	tr:first-child {
+		th {
+			border-width: 0;
+		}
+	}
+	th {
+		border-top: 1px solid #DDD;
+	}
+	.control-group {
+		margin: 0;
+	}
+}
+
+#tm-rule-table, #tm-show-table {
+	.dropdown-menu {
+		padding: 4px 8px;
+		code {
+			line-height: 26px;
+			cursor: pointer;
+		}
+		code:hover, code:active {
+			background-color: #DDD;
+		}
+	}
+	margin-bottom: 200px;
+	td {
+		position: relative;
+	}
+	ul.btn-group {
+		float: left;
+		position: static;
+		margin: 0;
+		li {
+			padding: 0;
+			position: static;
+			a, a:hover {
+				line-height: 20px;
+				color: inherit;
+				text-decoration: none;
+				padding: 0 6px;
+				margin: 0;
+				display: block;
+			}
+		}
+		li.open {
+			background-color: #04C;
+			background-image: none;
+			outline: 0;
+		}
+		li.chosen {
+			font-family: Menlo, Monaco, 'Courier New', monospace;
+			a {
+				min-width: 35px;
+			}
+		}
+	}
+}
+
+.modal-footer .btn-group {
+	display: inline;
+	float: right;
+	.btn {
+		float: left;
+		margin: 0;
+	}
+}
+
+.modal-footer #tm-control {
+	float: left;
+	width: 240px;
+	margin: 0;
+	.btn {
+		width: 60px;
+	}
+}
+
+.accordion-group {
+	margin-bottom: 20px;
+}
+
+#tm-show-rule-table {
+	.accordion-inner {
+		padding: 0;
+	}
+	tbody {
+		tr:first-child {
+			td {
+				border-top-width: 0px;
+			}
+		}
+	}
+}
+
+.badge {
+	padding: 1px 9px 2px;
+	font-weight: bold;
+	color: white;
+	background-color: #999;
+	.border-radius(9px);
+}
+
+.badge-success {
+	background-color: #5BB75B;
+}
+
+.modal-inner {
+	border-bottom: 1px solid #EEE;
+	padding: 15px;
+}
+
+.modal-inner:last-child {
+	border-bottom-width: 0px;
+}
+
+.modal-body {
+	padding: 0px;
+	border-width: 0px;
+}
+
+#tm-tape {
+	margin: 20px 0 0;
+	div.wrap {
+		float: left;
+		width: 36px;
+		height: 48px;
+		div {
+			.transition(all 0.5s ease);
+			border: 1px solid #DDD;
+			color: #08C;
+			width: 37px;
+			height: 36px;
+			text-align: center;
+			cursor: pointer;
+			line-height: 36px;
+			background-color: white;
+		}
+		div:hover {
+			background-color: whiteSmoke;
+		}
+	}
+	div.wrap.active {
+		div {
+			color: #999;
+			background-color: whiteSmoke;
+		}
+	}
+	div.wrap:first-child {
+		div {
+			.border-radius(4px 0 0 4px)
+		}
+	}
+	div.wrap:last-child {
+		div {
+			.border-radius(0 4px 4px 0)
+		}
+	}
+}
+
+.footer {
+	margin-top: 45px;
+	padding: 35px 0 36px;
+	border-top: 1px solid #e5e5e5;
+	p {
+	  margin-bottom: 0;
+	  color: #555;
+	}
+}
+
+@media (min-width: 1200px) {
+	.navbar-inner {
+		background-image: url(web_sprite_bgs.png);
+		background-repeat: repeat-x;
+	}
+	.container-fluid,
+	.navbar-fixed-top .container-fluid {
+		width: 980px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@media (max-width: 979px) {
+	.atmhead {
+		padding-top: 36px;
+		margin-bottom: 32px;
+		text-align: center;
+		h1 {
+			font-size: 64px;
+			line-height: 1;
+			margin-bottom: 18px
+		}
+		p {
+			margin-left: 5%;
+			margin-right: 5%;
+			font-size: 24px;
+			line-height: 36px;
+			font-weight: 300;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.container-fluid {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+
+/* Tweak navbar brand link to be super sleek
+-------------------------------------------------- */
+.navbar-fixed-top .brand {
+	padding-right: 0;
+	padding-left: 0;
+	margin-left: 20px;
+	float: right;
+	font-weight: bold;
+	color: #000;
+	text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+.navbar-fixed-top .brand:hover {
+	text-decoration: none;
+}
+
+@media (max-width: 980px) {
+	/* Unfloat brand */
+	.navbar-fixed-top .brand {
+		float: left;
+		margin-left: 0;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}

@@ -1,0 +1,36 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+    activerecord:
+        attributes:
+            user:
+                name: "Username"
+                password_confirmation: "Confirm"
+        errors:
+            models:
+                user:
+                    attributes:
+                        name:
+                            blank: "Please fill in your username."
+                            invalid: "Can only contain letters, numbers and hyphens."
+                            taken: "Username has been taken."
+                            too_short: "It's too short."
+                            too_long: "It's too long."
+                        password:
+                            blank: "Please fill in your password."
+                            confirmation: "Confirmation doesn't match."
+                            too_short: "It's too weak."
+                turing_machine:
+                    attributes:
+                        name:
+                            blank: "it can't be blank."
+                            too_long: "it's too long."
+                        description:
+                            too_long: "it's too long."
+                        default_input:
+                            too_long: "it's too long."
+                        short_url:
+                            taken: "it has already been taken."
+                            invalid: "it can only contain letters, numbers and hyphens."
+                            too_long: "it's too long."

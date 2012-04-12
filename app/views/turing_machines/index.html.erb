@@ -1,0 +1,28 @@
+<h1>Turing Machines</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @turing_machines.each do |turing_machine| %>
+      <tr>
+        <td><%= turing_machine.id %></td>
+        <td><%= link_to turing_machine.name, turing_machines_path(turing_machine) %></td>
+        <td><%= turing_machine.created_at %></td>
+        <td><%= turing_machine.users.count %></td>
+        <td><%= turing_machine.users_count %></td>
+        <td>
+          <%= link_to 'Edit', edit_turing_machine_path(turing_machine), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', turing_machine_path(turing_machine), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_turing_machine_path, :class => 'btn btn-primary' %>

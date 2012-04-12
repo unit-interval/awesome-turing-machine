@@ -1,0 +1,107 @@
+<div class="well atmlogin">
+
+<% if category == 'password' %>
+
+<%= form_for @user, :url => {:action => 'account', :category => 'password'}, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>Password</legend>
+
+    <div class="control-group <%= "error" if @current_password_errors %>">
+      <label class="control-label">Current Password:</label>
+      <div class="controls">
+        <%= password_field_tag :current_password, params[:current_password] %>
+		<% if @current_password_errors %>
+		<span class="help-block">
+			<%= @current_password_errors.join(" ")%>
+		</span>
+		<% end %>
+      </div>
+    </div>
+
+	<% password_error = @user.errors.get(:password) %>
+
+    <div class="control-group <%= "error" if password_error %>">
+      <label class="control-label">New Password:</label>
+      <div class="controls">
+        <%= f.password_field :password, :class => 'password_field' %>
+		<% if password_error %>
+		<span class="help-block">
+			<%= password_error.join(" ")%>
+		</span>
+		<% end %>
+      </div>
+    </div>
+
+	<% password_confirmation_error = @user.errors.get(:password_confirmation) %>
+
+    <div class="control-group <%= "error" if password_confirmation_error %>">
+      <label class="control-label">Verify Password:</label>
+      <div class="controls">
+        <%= f.password_field :password_confirmation, :class => 'password_field' %>
+		<% if password_confirmation_error %>
+		<span class="help-block">
+			<%= password_confirmation_error.join(" ")%>
+		</span>
+		<% end %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Save Changes", :class => "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<% elsif category == 'invitation' %>
+
+<form class="form-horizontal">
+	<fieldset>
+		<legend>Invitation Code</legend>
+		<div class= "invitation-code">
+			<% if @invitation_code.any? %>
+			<% @invitation_code.each do |i| %>
+			<code><%= i.code %></code>
+			<% end %>
+			<% else %>
+			<p>Congratulation! All of your invitation codes are used.</p>
+			<% end %>
+		</div>
+	</fieldset>
+</form>
+
+<% else %>
+
+<div class="alert">
+  <a class="close" data-dismiss="alert">×</a>
+  <strong>Notice!</strong> Once you change your username, other people might won't find you.
+</div>
+
+<%= form_for @user, :url => { :action => 'account', :category => 'profile' }, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>Profile</legend>
+
+	<% name_error = @user.errors.get(:name) %>
+
+    <div class="control-group <%= "error" if name_error %>">
+      <label class="control-label">Username:</label>
+	  <div class="controls">
+        <%= f.text_field :name, :value => @user.name %>
+		<% if name_error %>
+		<span class="help-block">
+			<%= name_error.join(" ") %>
+		</span>
+		<% else %>
+		<p class="help-block">http://awesometuringmachine.com/<%= @user.name %></p>
+		<% end %>
+	  </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Save Changes", :class => "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<% end %>
+
+</div>

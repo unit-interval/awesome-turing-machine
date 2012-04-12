@@ -1,0 +1,27 @@
+<div class="modal hide fade in" id="modal-play">
+	<%= render :partial => 'play' %>
+</div>
+
+<div class="atmhead">
+	<h1>What's Hot?</h1>
+</div>
+
+<div class="row-fluid">
+	<div class="span6 content-tm">
+		<div class="content-tm-header">
+			<div class="content-tm-inner">
+				<h2>Most Popular</h2>
+			</div>
+		</div>
+		<%= render :partial => 'turing_machines/line', :collection => @popular, :as => :item, :locals => { :type => "popular" } %>		
+	</div>
+
+	<div class="span6 content-tm">
+		<div class="content-tm-header">
+			<div class="content-tm-inner">
+				<h2>Newest</h2>
+			</div>
+		</div>
+		<%= render :partial => 'turing_machines/line', :collection => @newest, :as => :item, :locals => { :type => "newest" } %>
+	</div>
+</div>

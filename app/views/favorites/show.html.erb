@@ -1,0 +1,17 @@
+<h1>Favorite</h1>
+
+<p>
+  <b>User</b><br>
+  <%= @favorite.user_id %>
+</p>
+
+<p>
+  <b>Turing machine</b><br>
+  <%= @favorite.turing_machine_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', favorites_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_favorite_path(@favorite), :class => 'btn' %>
+  <%= link_to 'Delete', favorite_path(@favorite), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

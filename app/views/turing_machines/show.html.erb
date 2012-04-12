@@ -1,0 +1,17 @@
+<ul class="pager">
+  <li class="previous">
+	<%= link_to "&larr; Older".html_safe, @previous %>
+  </li>
+  <li>
+	<%= link_to "Random", random_path  %>
+  </li>
+  <li class="next">
+	<%= link_to "Newer &rarr;".html_safe, @next %>
+  </li>
+</ul>
+
+<div class="modal modal-static">
+	
+<%= render :partial => 'index/play' %>
+
+</div>

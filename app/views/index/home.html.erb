@@ -1,0 +1,80 @@
+<div class="modal hide fade in" id="modal-delete">
+  <div class="modal-header">
+    <a href="#" class="close" data-dismiss="modal">×</a>
+    <h3>Are you sure?</h3>
+  </div>
+  <div class="modal-body">
+  <div class="modal-inner">
+	<p>You are about to delete <span id="modal-delete-name"></span>. Are you sure?</p>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    <a href="#" class="btn btn-warning" id="modal-delete-btn">Delete</a>
+  </div>
+</div>
+
+<div class="modal hide fade in" id="modal-play">
+	<%= render :partial => 'play' %>
+</div>
+
+<div class="atmhead">
+	<h1><%= @user.name %>'s homepage</h2>
+</div>
+
+<div class="row-fluid">
+	<div class="span6 content-tm">
+		<div class="content-tm-header">
+			<div class="content-tm-inner">
+				<h2>Inventions</h2>
+			</div>
+		</div>
+		<% if @is_owner %>
+		<div class="content-item-control">
+		<%= link_to new_turing_machine_path do %>
+			<div class="content-tm-inner">
+				Create New
+			</div>
+		<% end %>
+		</div>
+		<% end %>
+		<% if @inventions.any? %>
+		<%= render :partial => 'turing_machines/line', :collection => @inventions, :as => :item, :locals => { :type => "invention", :is_owner => @is_owner } %>
+		<% else %>
+		<div class="content-tm-body">
+			<div class="content-item">
+				<div class="content-tm-inner">
+					<p>Nothing is here.</p>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	<div class="span6 content-tm">
+		<div class="content-tm-header">
+			<div class="content-tm-inner">
+				<h2>Favorites</h2>
+			</div>
+		</div>
+		<% if @is_owner %>
+		<div class="content-item-control">
+			<%= link_to popular_path do %>
+			<div class="content-tm-inner">
+				Find More
+			</div>
+			<% end %>
+		</div>
+		<% end %>
+		<% if @favorites.any? %>
+		<%= render :partial => 'turing_machines/line', :collection => @favorites, :as => :item, :locals => { :type => "favorite" } %>
+		<% else %>
+		<div class="content-tm-body">
+			<div class="content-item">
+				<div class="content-tm-inner">
+					<p>Nothing is here.</p>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
